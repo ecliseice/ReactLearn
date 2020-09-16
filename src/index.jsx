@@ -1,5 +1,4 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
+
 import Message from './components/Message'
 
 class HelloMessage extends React.Component {
