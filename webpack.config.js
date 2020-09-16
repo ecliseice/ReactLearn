@@ -3,11 +3,36 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        app: './src/index.js',
+        app: './src/index.jsx',
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: '[name].[contenthash:6].js'
+        // filename: '[name].[contenthash:6].js'
+        filename: '[name].js'
     },
-    plugins: [new HtmlWebpackPlugin({template: "./src/index.html"})]
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js(x)?$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
+                }
+            }
+        ]
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'build'),
+        compress: true,
+        port: 9000
+    },
+    plugins: [new HtmlWebpackPlugin({template: "./src/index.html"})],
+
+
 };
